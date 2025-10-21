@@ -1,59 +1,54 @@
 #!/usr/bin/env python
 """
-Setup script for fastmatcher package
-Builds Cython extensions for high-performance text matching
+Setup script for ACCR-Replace package
+Simple setup for pure Python implementation
 """
 
 import os
-from setuptools import setup, Extension
-from Cython.Build import cythonize
-import numpy
+from setuptools import setup, find_packages
 
-# Define Cython extensions
-extensions = [
-    Extension(
-        "fastmatcher.matcher",
-        ["fastmatcher/matcher.pyx"],
-        include_dirs=[numpy.get_include()],
-        language="c",
-    ),
-    Extension(
-        "fastmatcher.ac_automaton",
-        ["fastmatcher/ac_automaton.pyx"],
-        include_dirs=[numpy.get_include()],
-        language="c",
-    ),
-    Extension(
-        "fastmatcher.regex_engine",
-        ["fastmatcher/regex_engine.pyx"],
-        include_dirs=[numpy.get_include()],
-        language="c",
-    ),
-    Extension(
-        "fastmatcher.buffer",
-        ["fastmatcher/buffer.pyx"],
-        include_dirs=[numpy.get_include()],
-        language="c",
-    ),
-]
+# Read the README for long description
+with open("README.md", "r", encoding="utf-8") as fh:
+    long_description = fh.read()
 
-# Cython compiler directives
-compiler_directives = {
-    "language_level": 3,
-    "boundscheck": False,
-    "wraparound": False,
-    "initializedcheck": False,
-    "nonecheck": False,
-    "cdivision": True,
-    "infer_types": True,
-}
-
-if __name__ == "__main__":
-    setup(
-        ext_modules=cythonize(
-            extensions,
-            compiler_directives=compiler_directives,
-            annotate=True,  # Generate HTML annotation files for debugging
-        ),
-        zip_safe=False,
-    )
+setup(
+    name="ACCR-Replace",
+    version="0.1.0",
+    author="ACCR-Replace Team",
+    author_email="your-email@example.com",
+    description="High-performance text matching library with AC automaton and regex support",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
+    url="https://github.com/your-org/ACCR-Replace",
+    packages=find_packages(),
+    classifiers=[
+        "Development Status :: 3 - Alpha",
+        "Intended Audience :: Developers",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
+        "Programming Language :: Python :: 3.13",
+    ],
+    python_requires=">=3.7",
+    install_requires=[],
+    extras_require={
+        "dev": [
+            "pytest>=6.0",
+            "pytest-cov",
+            "black",
+            "isort",
+            "flake8",
+        ],
+    },
+    entry_points={
+        "console_scripts": [
+            # Add any command-line tools here if needed
+        ],
+    },
+)

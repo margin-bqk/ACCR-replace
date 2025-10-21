@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Performance benchmark for FastMatcher
+Performance benchmark for ACCR-Replace
 Compares performance with pure Python implementations
 """
 
@@ -11,11 +11,11 @@ from collections import defaultdict
 
 # Try to import our library (may not work until compiled)
 try:
-    from fastmatcher import Matcher
-    HAS_FASTMATCHER = True
+    from ACCR_Replace import Matcher
+    HAS_ACCR_REPLACE = True
 except ImportError:
-    HAS_FASTMATCHER = False
-    print("Warning: FastMatcher not available. Install or compile first.")
+    HAS_ACCR_REPLACE = False
+    print("Warning: ACCR-Replace not available. Install or compile first.")
 
 
 class PurePythonAC:
@@ -113,19 +113,19 @@ def benchmark_ac_automaton():
     
     print(f"Pure Python: {len(python_matches)} matches in {python_time:.4f} seconds")
     
-    # FastMatcher implementation (if available)
-    if HAS_FASTMATCHER:
-        print("Testing FastMatcher AC Automaton...")
-        fast_matcher = Matcher(patterns=patterns)
+    # ACCR-Replace implementation (if available)
+    if HAS_ACCR_REPLACE:
+        print("Testing ACCR-Replace AC Automaton...")
+        accr_matcher = Matcher(patterns=patterns)
         
         start_time = time.time()
-        fast_matches = fast_matcher.match(text.encode('utf-8'))
-        fast_time = time.time() - start_time
+        accr_matches = accr_matcher.match(text.encode('utf-8'))
+        accr_time = time.time() - start_time
         
-        print(f"FastMatcher: matches in {fast_time:.4f} seconds")
-        print(f"Speedup: {python_time/fast_time:.2f}x")
+        print(f"ACCR-Replace: matches in {accr_time:.4f} seconds")
+        print(f"Speedup: {python_time/accr_time:.2f}x")
     else:
-        print("FastMatcher not available for comparison")
+        print("ACCR-Replace not available for comparison")
 
 
 def benchmark_regex_matching():
@@ -159,27 +159,27 @@ def benchmark_regex_matching():
     
     print(f"Pure Python: {len(python_matches)} matches in {python_time:.4f} seconds")
     
-    # FastMatcher regex (if available)
-    if HAS_FASTMATCHER:
-        print("Testing FastMatcher Regex...")
-        fast_matcher = Matcher(regex=regex_patterns)
+    # ACCR-Replace regex (if available)
+    if HAS_ACCR_REPLACE:
+        print("Testing ACCR-Replace Regex...")
+        accr_matcher = Matcher(regex=regex_patterns)
         
         start_time = time.time()
-        fast_matches = fast_matcher.match(text.encode('utf-8'))
-        fast_time = time.time() - start_time
+        accr_matches = accr_matcher.match(text.encode('utf-8'))
+        accr_time = time.time() - start_time
         
-        print(f"FastMatcher: matches in {fast_time:.4f} seconds")
-        print(f"Speedup: {python_time/fast_time:.2f}x")
+        print(f"ACCR-Replace: matches in {accr_time:.4f} seconds")
+        print(f"Speedup: {python_time/accr_time:.2f}x")
     else:
-        print("FastMatcher not available for comparison")
+        print("ACCR-Replace not available for comparison")
 
 
 def benchmark_streaming():
     """Benchmark streaming performance"""
     print("\n=== Streaming Performance Benchmark ===")
     
-    if not HAS_FASTMATCHER:
-        print("FastMatcher not available for streaming benchmark")
+    if not HAS_ACCR_REPLACE:
+        print("ACCR-Replace not available for streaming benchmark")
         return
     
     patterns = ["error", "warning", "info", "debug", "critical"]
@@ -222,8 +222,8 @@ def memory_usage_demo():
     """Demo memory usage patterns"""
     print("\n=== Memory Usage Demo ===")
     
-    if not HAS_FASTMATCHER:
-        print("FastMatcher not available for memory demo")
+    if not HAS_ACCR_REPLACE:
+        print("ACCR-Replace not available for memory demo")
         return
     
     # Test with many patterns
@@ -239,7 +239,7 @@ def memory_usage_demo():
 
 
 if __name__ == "__main__":
-    print("FastMatcher Performance Benchmark Suite")
+    print("ACCR-Replace Performance Benchmark Suite")
     print("=" * 50)
     
     benchmark_ac_automaton()

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Unit tests for fastmatcher library
+Unit tests for ACCR-Replace library
 Tests AC automaton, regex engine, and streaming functionality
 """
 
@@ -8,10 +8,10 @@ import pytest
 import sys
 import os
 
-# Add parent directory to path to import fastmatcher
+# Add parent directory to path to import ACCR-Replace
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from fastmatcher import Matcher, create_matcher, match_text
+from ACCR_Replace import Matcher, create_matcher, match_text
 
 
 class TestACAutomaton:

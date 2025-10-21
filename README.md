@@ -1,4 +1,4 @@
-# FastMatcher
+# ACCR-Replace
 
 A high-performance text matching library that combines AC automaton, regular expressions, and streaming input support, accelerated with Cython.
 
@@ -15,8 +15,8 @@ A high-performance text matching library that combines AC automaton, regular exp
 
 ```bash
 # Install from source
-git clone https://github.com/your-org/fastmatcher.git
-cd fastmatcher
+git clone https://github.com/your-org/ACCR-Replace.git
+cd ACCR-Replace
 pip install -e .
 
 # Or install dependencies for development
@@ -26,7 +26,7 @@ pip install -e ".[dev]"
 ## Quick Start
 
 ```python
-from fastmatcher import Matcher
+from ACCR_Replace import Matcher
 
 # Create a matcher with AC patterns and regex
 matcher = Matcher(
@@ -46,7 +46,7 @@ for match in matches:
 ## Streaming Mode
 
 ```python
-from fastmatcher import Matcher
+from ACCR_Replace import Matcher
 
 # Create streaming matcher
 matcher = Matcher(
@@ -66,7 +66,7 @@ for chunk in read_log_stream():
 ### Matcher Class
 
 ```python
-Matcher(patterns=None, regex=None, streaming=False)
+from ACCR_Replace import Matcher
 ```
 
 **Parameters:**
@@ -85,7 +85,7 @@ Matcher(patterns=None, regex=None, streaming=False)
 ### Convenience Functions
 
 ```python
-from fastmatcher import create_matcher, match_text
+from ACCR_Replace import create_matcher, match_text
 
 # Create matcher instance
 matcher = create_matcher(patterns=["test"], regex=[r"\d+"])
@@ -96,7 +96,7 @@ matches = match_text("test 123", patterns=["test"], regex=[r"\d+"])
 
 ## Performance
 
-FastMatcher is designed for high-performance text processing:
+ACCR-Replace is designed for high-performance text processing:
 
 - **AC Automaton**: O(n + m + z) time complexity where n is text length, m is total pattern length, z is number of matches
 - **Regex Engine**: PCRE2-optimized matching with JIT compilation
@@ -108,7 +108,7 @@ FastMatcher is designed for high-performance text processing:
 ### Basic Usage
 
 ```python
-from fastmatcher import Matcher
+from ACCR_Replace import Matcher
 
 # Simple pattern matching
 matcher = Matcher(patterns=["hello", "world"])
@@ -140,7 +140,7 @@ def process_large_file(filename, patterns, regex_patterns):
 
 ```python
 import re
-from fastmatcher import Matcher
+from ACCR_Replace import Matcher
 
 # Common log patterns
 error_patterns = ["ERROR", "CRITICAL", "FAILED"]
@@ -164,8 +164,8 @@ for line in sys.stdin:
 
 ```bash
 # Clone repository
-git clone https://github.com/your-org/fastmatcher.git
-cd fastmatcher
+git clone https://github.com/your-org/ACCR-Replace.git
+cd ACCR-Replace
 
 # Install in development mode
 pip install -e ".[dev]"
@@ -184,7 +184,7 @@ python setup.py build_ext --inplace
 pytest
 
 # Run with coverage
-pytest --cov=fastmatcher
+pytest --cov=ACCR_Replace
 
 # Run specific test categories
 pytest tests/test_matcher.py::TestACAutomaton

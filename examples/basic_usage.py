@@ -1,29 +1,29 @@
 #!/usr/bin/env python3
 """
-Basic usage examples for FastMatcher
+Basic usage examples for ACCR-Replace
 Demonstrates common use cases and API patterns
 """
 
 import sys
 import os
 
-# Add parent directory to path to import fastmatcher
+# Add parent directory to path to import ACCR-Replace
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 try:
-    from fastmatcher import Matcher, create_matcher, match_text
-    HAS_FASTMATCHER = True
+    from ACCR_Replace import Matcher, create_matcher, match_text
+    HAS_ACCR_REPLACE = True
 except ImportError:
-    HAS_FASTMATCHER = False
-    print("Warning: FastMatcher not available. Install or compile first.")
+    HAS_ACCR_REPLACE = False
+    print("Warning: ACCR-Replace not available. Install or compile first.")
 
 
 def example_basic_ac_matching():
     """Example: Basic AC automaton matching"""
     print("=== Basic AC Automaton Matching ===")
     
-    if not HAS_FASTMATCHER:
-        print("FastMatcher not available")
+    if not HAS_ACCR_REPLACE:
+        print("ACCR-Replace not available")
         return
     
     # Create matcher with string patterns
@@ -48,8 +48,8 @@ def example_regex_matching():
     """Example: Regular expression matching"""
     print("\n=== Regular Expression Matching ===")
     
-    if not HAS_FASTMATCHER:
-        print("FastMatcher not available")
+    if not HAS_ACCR_REPLACE:
+        print("ACCR-Replace not available")
         return
     
     # Create matcher with regex patterns
@@ -79,8 +79,8 @@ def example_combined_matching():
     """Example: Combined AC and regex matching"""
     print("\n=== Combined AC and Regex Matching ===")
     
-    if not HAS_FASTMATCHER:
-        print("FastMatcher not available")
+    if not HAS_ACCR_REPLACE:
+        print("ACCR-Replace not available")
         return
     
     # Create matcher with both AC patterns and regex
@@ -123,8 +123,8 @@ def example_streaming_mode():
     """Example: Streaming mode for large data"""
     print("\n=== Streaming Mode Example ===")
     
-    if not HAS_FASTMATCHER:
-        print("FastMatcher not available")
+    if not HAS_ACCR_REPLACE:
+        print("ACCR-Replace not available")
         return
     
     # Create streaming matcher
@@ -162,8 +162,8 @@ def example_convenience_functions():
     """Example: Using convenience functions"""
     print("\n=== Convenience Functions ===")
     
-    if not HAS_FASTMATCHER:
-        print("FastMatcher not available")
+    if not HAS_ACCR_REPLACE:
+        print("ACCR-Replace not available")
         return
     
     # Quick one-time matching
@@ -193,8 +193,8 @@ def example_error_handling():
     """Example: Error handling and edge cases"""
     print("\n=== Error Handling Examples ===")
     
-    if not HAS_FASTMATCHER:
-        print("FastMatcher not available")
+    if not HAS_ACCR_REPLACE:
+        print("ACCR-Replace not available")
         return
     
     # Empty patterns
@@ -224,7 +224,7 @@ def example_error_handling():
 
 
 if __name__ == "__main__":
-    print("FastMatcher Usage Examples")
+    print("ACCR-Replace Usage Examples")
     print("=" * 50)
     
     example_basic_ac_matching()

@@ -8,7 +8,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "fastmatcher"
+name = "ACCR-Replace"
+version = "0.1.0"
 description = "High-performance text matching library with AC automaton, regex, and streaming support"
 readme = "README.md"
 license = {text = "MIT"}
@@ -45,13 +46,13 @@ dev = [
 ]
 
 [tool.setuptools]
-packages = ["fastmatcher"]
+packages = ["ACCR_Replace"]
 
 [tool.setuptools.package-dir]
-fastmatcher = "fastmatcher"
+"ACCR_Replace" = "ACCR_Replace"
 
 [tool.setuptools_scm]
-write_to = "fastmatcher/_version.py"
+write_to = "ACCR_Replace/_version.py"
 
 [tool.black]
 line-length = 88
