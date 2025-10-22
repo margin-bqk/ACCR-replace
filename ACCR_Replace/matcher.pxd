@@ -28,7 +28,7 @@ cdef class Matcher:
     cdef list _combine_matches(self, list ac_matches, list regex_matches) nogil
     
     # Public methods
-    cpdef void build(self, list patterns=[], list regex=[])
+    cpdef void build(self, list patterns=*, list regex=*)
     cpdef list feed(self, bytes chunk)
     cpdef list match(self, bytes text)
     cpdef void reset(self)

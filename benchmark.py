@@ -26,6 +26,7 @@ class PurePythonAC:
         self.root = {}
         self.fail = {}
         self.output = defaultdict(list)
+        self.node_id = 0
         self._build()
     
     def _build(self):
@@ -41,7 +42,7 @@ class PurePythonAC:
         queue = []
         for char, node in self.root.items():
             if char != '*output*':
-                self.fail[node] = self.root
+                self.fail[id(node)] = self.root
                 queue.append(node)
         
         while queue:
@@ -50,20 +51,20 @@ class PurePythonAC:
                 if char == '*output*':
                     continue
                 
-                fail_node = self.fail[current]
+                fail_node = self.fail.get(id(current), self.root)
                 while fail_node is not None and char not in fail_node:
-                    fail_node = self.fail.get(fail_node, None)
+                    fail_node = self.fail.get(id(fail_node), None)
                 
                 if fail_node is None:
-                    self.fail[node] = self.root
+                    self.fail[id(node)] = self.root
                 else:
-                    self.fail[node] = fail_node[char]
+                    self.fail[id(node)] = fail_node[char]
                 
                 # Collect outputs
-                if '*output*' in self.fail[node]:
-                    self.output[node].extend(self.fail[node]['*output*'])
+                if '*output*' in self.fail.get(id(node), {}):
+                    self.output[id(node)].extend(self.fail[id(node)]['*output*'])
                 if '*output*' in node:
-                    self.output[node].extend(node['*output*'])
+                    self.output[id(node)].extend(node['*output*'])
                 
                 queue.append(node)
     
@@ -74,7 +75,7 @@ class PurePythonAC:
         
         for i, char in enumerate(text):
             while current is not None and char not in current:
-                current = self.fail.get(current, None)
+                current = self.fail.get(id(current), None)
             
             if current is None:
                 current = self.root
@@ -83,8 +84,8 @@ class PurePythonAC:
             current = current[char]
             
             # Check for matches
-            if current in self.output:
-                for pattern in self.output[current]:
+            if id(current) in self.output:
+                for pattern in self.output[id(current)]:
                     start = i - len(pattern) + 1
                     matches.append({
                         'pattern': pattern,
@@ -231,11 +232,11 @@ def memory_usage_demo():
     matcher = Matcher(patterns=many_patterns)
     
     print(f"Built AC automaton with {len(many_patterns)} patterns")
-    print(f"Node count: {matcher.ac_automaton.get_node_count()}")
+    print("Memory usage demo completed (internal attributes not accessible)")
     
     # Test buffer memory
     stream_matcher = Matcher(patterns=["test"], streaming=True)
-    print(f"Stream buffer capacity: {stream_matcher.stream_buffer.get_capacity()} bytes")
+    print("Stream buffer initialized successfully")
 
 
 if __name__ == "__main__":

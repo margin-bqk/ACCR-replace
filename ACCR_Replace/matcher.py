@@ -6,15 +6,21 @@ Provides fallback implementation if Cython modules are not compiled
 import sys
 import warnings
 
-# Pure Python implementation (fallback)
-warnings.warn(
-    "Cython modules not available. Using pure Python implementation. "
-    "Performance will be significantly slower. "
-    "Run 'python setup.py build_ext --inplace' to compile Cython extensions.",
-    RuntimeWarning
-)
+# Check if Cython modules are available
+try:
+    from .ac_automaton import ACAutomaton
+    from .regex_engine import RegexEngine
+    from .buffer import StreamBuffer
+    HAS_CYTHON = True
+except ImportError:
+    HAS_CYTHON = False
+    warnings.warn(
+        "Cython modules not available. Using pure Python implementation. "
+        "Performance will be significantly slower. Run 'python setup.py build_ext --inplace' to compile Cython extensions.",
+        RuntimeWarning
+    )
 
-# Pure Python implementation
+# Pure Python implementation (fallback)
 class Matcher:
     """Pure Python implementation of Matcher (fallback)"""
     
