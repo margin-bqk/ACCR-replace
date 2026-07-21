@@ -1,25 +1,24 @@
 """
-Simplified regex engine implementation in Cython
-Basic regex matching functionality
+简化的 regex engine 实现
+使用 Python re 模块简化实现
 """
 
 from libc.stdint cimport uint32_t
-from cpython.bytes cimport PyBytes_AsString
 import cython
 import re
 
 
 cdef class RegexEngine:
-    """Simplified regex engine for pattern matching"""
+    """简化的正则表达式引擎"""
     
     def __cinit__(self):
-        """Initialize the regex engine"""
+        """初始化引擎"""
         self.patterns = []
         self.compiled_patterns = []
         self.built = False
     
     cpdef void build(self, list patterns):
-        """Build the regex engine from patterns"""
+        """构建正则表达式引擎"""
         self.patterns = patterns
         self.compiled_patterns = []
         
@@ -28,13 +27,13 @@ cdef class RegexEngine:
                 compiled = re.compile(pattern)
                 self.compiled_patterns.append(compiled)
             except re.error:
-                # Skip invalid patterns
+                # 跳过无效的正则表达式
                 pass
         
         self.built = True
     
-    cpdef list match(self, bytes text, uint32_t text_len=0):
-        """Match regex patterns against text"""
+    cpdef list match(self, bytes text):
+        """匹配文本中的正则表达式"""
         if not self.built:
             return []
         
@@ -47,7 +46,8 @@ cdef class RegexEngine:
                     'pattern': compiled.pattern,
                     'start': match_obj.start(),
                     'end': match_obj.end(),
-                    'matched': match_obj.group()
+                    'matched': match_obj.group(),
+                    'type': 'regex'
                 })
         
         return matches

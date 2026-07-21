@@ -1,15 +1,25 @@
 #!/usr/bin/env python
 """
 Setup script for ACCR-Replace package
-Simple setup for pure Python implementation
+Supports both Cython compilation and pure Python implementation
 """
 
 import os
-from setuptools import setup, find_packages
+from setuptools import setup, find_packages, Extension
+from Cython.Build import cythonize
 
 # Read the README for long description
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
+
+# Cython extensions - 只编译主 matcher 模块
+extensions = [
+    Extension(
+        "ACCR_Replace.matcher_cython",
+        ["ACCR_Replace/matcher.pyx"],
+        language="c",
+    ),
+]
 
 setup(
     name="ACCR-Replace",
@@ -21,6 +31,14 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/your-org/ACCR-Replace",
     packages=find_packages(),
+    ext_modules=cythonize(
+        extensions,
+        compiler_directives={
+            'language_level': "3",
+            'boundscheck': False,
+            'wraparound': False,
+        },
+    ),
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",
@@ -44,6 +62,7 @@ setup(
             "black",
             "isort",
             "flake8",
+            "Cython>=3.0.0",
         ],
     },
     entry_points={
